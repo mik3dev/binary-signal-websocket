@@ -18,6 +18,7 @@
             var el = document.getElementById('content');
             socket.on('fxData', function(data) {
                 el.innerHTML = JSON.stringify(data);
+                console.log(data);
             })
         </script>
 </body>
