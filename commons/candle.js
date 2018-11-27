@@ -14,9 +14,9 @@ class Candle {
         this.high = Number.parseFloat(candle.mid.h);
         this.low = Number.parseFloat(candle.mid.l);
         this.close = Number.parseFloat(candle.mid.c);
-        this.indicatorStochLong = 0;
-        this.indicatorStochShort = 0;
-        this.indicatorBolBand = 0;
+        // this.indicatorStochLong = 0;
+        // this.indicatorStochShort = 0;
+        // this.indicatorBolBand = 0;
         this.calculateIndicators(candles.candles);
         this.signalA = signalA(this.open, this.indicatorBolBand, this.indicatorStochLong, this.indicatorStochShort);
         this.signalB = signalB(this.indicatorStochLong, this.indicatorStochShort);

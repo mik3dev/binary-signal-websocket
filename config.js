@@ -11,6 +11,8 @@ const Stoch_D = process.env.Stoch_D;
 const Stoch_Smooth = process.env.Stoch_Smooth;
 const bolBandPeriod = process.env.bolBandPeriod;
 const bolBandStdDev = process.env.bolBandStdDev;
+const stochLowerLimit = process.env.stochLowerLimit;
+const stochHigherLimit =process.env.stochHigherLimit;
 
 module.exports = {
     PORT,
@@ -25,4 +27,6 @@ module.exports = {
     Stoch_Smooth,
     bolBandPeriod,
     bolBandStdDev,
+    stochLowerLimit,
+    stochHigherLimit
 }
