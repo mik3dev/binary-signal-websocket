@@ -1,4 +1,3 @@
-// const oandaConnection = require('./oandaConnection');
 const config = require('../config');
 const _ = require('lodash');
 
@@ -19,7 +18,8 @@ class Candle {
         this.indicatorStochShort = 0;
         this.indicatorBolBand = 0;
         this.calculateIndicators(candles.candles);
-
+        this.signalA = signalA(this.open, this.indicatorBolBand, this.indicatorStochLong, this.indicatorStochShort);
+        this.signalB = signalB(this.indicatorStochLong, this.indicatorStochShort);
     }
 
     calculateIndicators(candles){
@@ -94,6 +94,26 @@ function calcBolBand(serie, period=config.bolBandPeriod, stdDev=config.bolBandSt
         bolBand: mean,
         upperBand: mean + sd,
         lowerBand: mean - sd,
+    }
+}
+
+function signalA(open, bolBand, stochLong, stochShort){
+    if(open>=bolBand.upperBand && stochLong.stoch>=config.stochHigherLimit && stochShort.stoch>=config.stochHigherLimit){
+        return 'SELL'
+    } else if(open<=bolBand.lowerBand && stochLong.stoch<=config.stochLowerLimit && stochShort.stoch<=config.stochLowerLimit){
+        return 'BUY'
+    } else {
+        return 'NEUTRAL'
+    }
+}
+
+function signalB(stochLong, stochShort){
+    if(stochLong.stoch > stochLong.smoothedStoch && stochShort.stoch > stochShort.smoothedStoch){
+        return 'BUY'
+    } else if(stochLong.stoch < stochLong.smoothedStoch && stochShort.stoch < stochShort.smoothedStoch){
+        return 'SELL'
+    } else {
+        return 'NEUTRAL'
     }
 }
 
