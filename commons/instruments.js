@@ -1,0 +1,33 @@
+instruments = [
+    'EUR_USD',
+    'EUR_GBP',
+    'EUR_JPY',
+    'EUR_CAD',
+    'EUR_CHF',
+    'EUR_AUD',
+    'EUR_NZD',
+    'GBP_USD',
+    'USD_JPY',
+    'USD_CAD',
+    'USD_CHF',
+    'AUD_USD',
+    'NZD_USD',
+    'GBP_JPY',
+    'GBP_CAD',
+    'GBP_CHF',
+    'GBP_AUD',
+    'GBP_NZD',
+    'CAD_JPY',
+    'CHF_JPY',
+    'AUD_JPY',
+    'NZD_JPY',
+    'CAD_CHF',
+    'AUD_CAD',
+    'NZD_CAD',
+    'AUD_CHF',
+    'NZD_CHF',
+    'AUD_NZD',
+    'XAU_USD'
+]
+
+module.exports = instruments;
