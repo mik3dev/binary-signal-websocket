@@ -41,5 +41,5 @@ setInterval( () => {
             }))
         })
     })
-    Promise.all(promises).then(r => io.emit('Message', r));
+    Promise.all(promises).then(r => io.emit('fxData', r));
 }, config.TIMER);

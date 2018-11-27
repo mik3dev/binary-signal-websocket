@@ -16,7 +16,7 @@
     <script>
             var socket = io();
             var el = document.getElementById('content');
-            socket.on('Message', function(data) {
+            socket.on('fxData', function(data) {
                 el.innerHTML = JSON.stringify(data);
             })
         </script>
