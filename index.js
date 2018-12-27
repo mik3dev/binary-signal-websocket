@@ -36,10 +36,10 @@ setInterval( () => {
                     resolve(new Candle(instrument, timeframe, resp.data));
                 })
                 .catch(e => reject({
-                    'error': `Problem to load symbol: ${instrument} - timeframe: ${timeframe} Data.`
+                    'error': `Problem to load symbol: ${instrument} - timeframe: ${timeframe} Data: ${e}`
                 }))
             }))
         })
     })
-    Promise.all(promises).then(r => io.emit('fxData', r));
+    Promise.all(promises).then(r => io.emit('fxData', r)).catch(e => console.log(e));
 }, config.TIMER);
