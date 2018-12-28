@@ -6,7 +6,8 @@ class Candle {
     constructor (instrument, timeframe, candles){
         const candle = candles.candles[config.numerOfRetrievingCandles -1];
         this.instrument = instrument;
-        this.timeframe = timeframe;
+        this.timeframe = timeframe.name;
+        this.flag = timeframe.flag;
         this.complete = candle.complete;
         this.volume = (candle.volume);
         this.time = candle.time;

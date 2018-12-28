@@ -31,12 +31,12 @@ setInterval( () => {
     _.forEach(instruments, instrument => {
         _.forEach(timeframes, timeframe => {
             promises.push(new Promise((resolve, reject) => {
-                oandaConnection.getCandles(instrument, timeframe, config.numerOfRetrievingCandles)
+                oandaConnection.getCandles(instrument, timeframe.name, config.numerOfRetrievingCandles)
                 .then(resp => {
                     resolve(new Candle(instrument, timeframe, resp.data));
                 })
                 .catch(e => reject({
-                    'error': `Problem to load symbol: ${instrument} - timeframe: ${timeframe} Data: ${e}`
+                    'error': `Problem to load symbol: ${instrument} - timeframe: ${timeframe.name} Data: ${e}`
                 }))
             }))
         })
