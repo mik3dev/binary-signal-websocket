@@ -6,15 +6,15 @@
 
 timeframes = [
     {
-        name: 'M15',
+        name: 'M5',
         flag: 'high'
     },
     {
-        name: 'M5',
+        name: 'M2',
         flag: 'mid'
     },
     {
-        name: 'M2',
+        name: 'S15',
         flag: 'low'
     }
 ];

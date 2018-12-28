@@ -16,8 +16,9 @@ class Candle {
         this.low = round(candle.mid.l);
         this.close = round(candle.mid.c);
         this.calculateIndicators(candles.candles);
-        this.signalA = signalA(this.open, this.indicatorBolBand, this.indicatorStochLong, this.indicatorStochShort, this.rsi, this.stochRsi);
-        this.signalB = signalB(this.indicatorStochLong, this.indicatorStochShort, this.stochRsi);
+        this.signal4High = signal4High(this.open, this.indicatorBolBand, this.indicatorStochLong, this.indicatorStochShort, this.rsi, this.stochRsi);
+        this.signal4Mid = signal4Mid(this.indicatorStochLong, this.indicatorStochShort, this.stochRsi);
+        this.signal4Low = signal4Low(this.indicatorWma, this.indicatorEma, this.indicatorAwesomeOsc);
     }
 
     calculateIndicators(candles){
@@ -36,6 +37,10 @@ class Candle {
         this.indicatorBolBand = calcBolBand(priceArray, config.bolBandPeriod, config.bolBandStdDev);
         this.rsi = calcRSI(priceArray, config.rsiPeriod);
         this.stochRsi = calcStochRsi(priceArray);
+        this.indicatorAwesomeOsc = calcAwesomeOsc(priceArray, config.AOLongPeriod, config.AOShortPeriod);
+        this.indicatorEma = calcEma(priceArray, config.emaPeriod);
+        this.indicatorSma = calcSma(priceArray, config.smaPeriod);
+        this.indicatorWma = calcWma(priceArray, config.wmaPeriod);
     }
 }
 
@@ -232,6 +237,56 @@ function calcAwesomeOsc(serie, longPeriod=config.AOLongPeriod, shortPeriod=confi
     const shortSma = sum / shortPeriod;
 
     return shortSma - longSma;
+}
+
+function signal4High(open, bolBand, stochLong, stochShort, rsi, stochRsi){
+    if(
+        open >= bolBand.upperBand && 
+        stochLong.stoch >= config.stochHigherLimit && 
+        stochShort.stoch >= config.stochHigherLimit && 
+        rsi >= config.rsiHigherLimit &&
+        stochRsi.stochRsi >= config.stochRsiHigherLimit)
+    {
+        return 'SELL'
+    } else if(
+        open <= bolBand.lowerBand && 
+        stochLong.stoch <= config.stochLowerLimit && 
+        stochShort.stoch<=config.stochLowerLimit &&
+        rsi <= config.rsiLowerLimit &&
+        stochRsi.stochRsi <= config.stochRsiLowerLimit)
+    {
+        return 'BUY'
+    } else {
+        return 'NEUTRAL'
+    }
+}
+
+function signal4Mid(stochLong, stochShort, stochRsi){
+    if(
+        stochLong.stoch > stochLong.smoothedStoch && 
+        stochShort.stoch > stochShort.smoothedStoch &&
+        stochRsi.stochRsi > stochRsi.smoothedStochRsi)
+    {
+        return 'BUY'
+    } else if(
+        stochLong.stoch < stochLong.smoothedStoch && 
+        stochShort.stoch < stochShort.smoothedStoch &&
+        stochRsi.stochRsi < stochRsi.smoothedStochRsi)
+    {
+        return 'SELL'
+    } else {
+        return 'NEUTRAL'
+    }
+}
+
+function signal4Low(wma, ema, awesomeOsc){
+    if(wma<ema && awesomeOsc<0){
+        return 'SELL'
+    } else if(wma>ema && awesomeOsc>0){
+        return 'BUY'
+    } else {
+        return 'NEUTRAL'
+    }
 }
 
 function signalA(open, bolBand, stochLong, stochShort, rsi, stochRsi){
