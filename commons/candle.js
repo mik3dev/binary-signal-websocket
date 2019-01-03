@@ -18,7 +18,7 @@ class Candle {
         this.calculateIndicators(candles.candles);
         this.signal4High = signal4High(this.open, this.indicatorBolBand, this.indicatorStochLong, this.indicatorStochShort, this.rsi, this.stochRsi);
         this.signal4Mid = signal4Mid(this.indicatorStochLong, this.indicatorStochShort, this.stochRsi);
-        this.signal4Low = signal4Low(this.indicatorWma, this.indicatorEma, this.indicatorAwesomeOsc);
+        this.signal4Low = signal4Low(this.indicatorWma, this.indicatorEma, this.indicatorSma, this.indicatorAwesomeOsc);
     }
 
     calculateIndicators(candles){
@@ -279,10 +279,10 @@ function signal4Mid(stochLong, stochShort, stochRsi){
     }
 }
 
-function signal4Low(wma, ema, awesomeOsc){
-    if(wma<ema && awesomeOsc<0){
+function signal4Low(wma, ema, sma, awesomeOsc){
+    if(wma<ema && wma<sma && awesomeOsc<0){
         return 'SELL'
-    } else if(wma>ema && awesomeOsc>0){
+    } else if(wma>ema && wma>sma &&awesomeOsc>0){
         return 'BUY'
     } else {
         return 'NEUTRAL'

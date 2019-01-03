@@ -9,7 +9,21 @@ const config = require('./config');
 const oandaConnection = require('./commons/oandaConnection');
 const Candle = require('./commons/candle');
 const instruments = require('./commons/instruments');
-const timeframes = require('./commons/timeframes');
+const timeframes = [
+    {
+        name: config.highTimeframe,
+        flag: 'high'
+    },
+    {
+        name: config.midTimeframe,
+        flag: 'mid'
+    },
+    {
+        name: config.lowTimeframe,
+        flag: 'low'
+    }
+];
+// const timeframes = require('./commons/timeframes')
 
 const server = express()
     .use(cors({

@@ -31,6 +31,10 @@ const stochRsiHigherLimit = process.env.stochRsiHigherLimit || 80
 const rsiLowerLimit = process.env.rsiLowerLimit || 30
 const rsiHigherLimit = process.env.rsiHigherLimit || 70
 
+const highTimeframe = process.env.highTimeframe || M5
+const midTimeframe = process.env.midTimeframe || M2
+const lowTimeframe = process.env.lowTimeframe || S10
+
 module.exports = {
     PORT,
     TIMER,
@@ -60,4 +64,7 @@ module.exports = {
     stochRsiHigherLimit,
     rsiLowerLimit,
     rsiHigherLimit,
+    highTimeframe,
+    midTimeframe,
+    lowTimeframe,
 }
