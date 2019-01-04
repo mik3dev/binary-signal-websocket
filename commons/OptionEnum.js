@@ -1,0 +1,14 @@
+const OPTION_ENUM = {
+    BOL_BAND: 0,
+    RSI_LIMIT: 1,
+    STOCH_LIMIT_LONG: 2,
+    STOCH_CROSS_LONG: 3,
+    STOCH_LIMIT_SHORT: 4,
+    STOCH_CROSS_SHORT: 5,
+    STOCH_RSI_LIMIT: 6,
+    STOCH_RSI_CROSS: 7,
+    MA_CROSS: 8,
+    AWESOME_OSC: 9
+}
+
+module.exports = OPTION_ENUM;

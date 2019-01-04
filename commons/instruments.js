@@ -14,20 +14,20 @@ instruments = [
     'NZD_USD',
     'GBP_JPY',
     'GBP_CAD',
-    // 'GBP_CHF',
-    // 'GBP_AUD',
-    // 'GBP_NZD',
-    // 'CAD_JPY',
-    // 'CHF_JPY',
+    'GBP_CHF',
+    'GBP_AUD',
+    'GBP_NZD',
+    'CAD_JPY',
+    'CHF_JPY',
     'AUD_JPY',
-    // 'NZD_JPY',
+    'NZD_JPY',
     'CAD_CHF',
     'AUD_CAD',
-    // 'NZD_CAD',
+    'NZD_CAD',
     'AUD_CHF',
-    // 'NZD_CHF',
-    // 'AUD_NZD',
-    // 'XAU_USD'
+    'NZD_CHF',
+    'AUD_NZD',
+    'XAU_USD'
 ]
 
 module.exports = instruments;
