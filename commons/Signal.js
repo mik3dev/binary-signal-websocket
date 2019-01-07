@@ -24,8 +24,8 @@ class Signal {
 
     /* STOCH_CROSS_LONG: 3 */
     static validateStochLongCross(candle){
-        if(candle.indicatorStochLong.stoch > candle.indicatorStochLong.smoothedStoch) return 'BUY'
-        else if(candle.indicatorStochLong.stoch < candle.indicatorStochLong.smoothedStoch) return 'SELL'
+        if(candle.indicatorStochLong.stoch > candle.indicatorStochLong.smooth) return 'BUY'
+        else if(candle.indicatorStochLong.stoch < candle.indicatorStochLong.smooth) return 'SELL'
         else return 'NEUTRAL'
     }
 
@@ -38,8 +38,8 @@ class Signal {
 
     /* STOCH_CROSS_SHORT: 5 */
     static validateStochLongCross(candle){
-        if(candle.indicatorStochShort.stoch > candle.indicatorStochShort.smoothedStoch) return 'BUY'
-        else if(candle.indicatorStochShort.stoch < candle.indicatorStochShort.smoothedStoch) return 'SELL'
+        if(candle.indicatorStochShort.stoch > candle.indicatorStochShort.smooth) return 'BUY'
+        else if(candle.indicatorStochShort.stoch < candle.indicatorStochShort.smooth) return 'SELL'
         else return 'NEUTRAL'
     }
 
@@ -52,8 +52,8 @@ class Signal {
 
     /* STOCH_RSI_CROSS: 7 */
     static validateStochLongCross(candle){
-        if(candle.indicatorStochRsi.stoch > candle.indicatorStochRsi.smoothedStoch) return 'BUY'
-        else if(candle.indicatorStochRsi.stoch < candle.indicatorStochRsi.smoothedStoch) return 'SELL'
+        if(candle.indicatorStochRsi.stoch > candle.indicatorStochRsi.smooth) return 'BUY'
+        else if(candle.indicatorStochRsi.stoch < candle.indicatorStochRsi.smooth) return 'SELL'
         else return 'NEUTRAL'
     }
 
