@@ -93,6 +93,7 @@ class Candle {
             else {
                 if(sellCount == total) return 'SELL'
                 else if(buyCount == total) return 'BUY'
+                else return 'NEUTRAL'
             }
         }
     }
