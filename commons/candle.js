@@ -64,15 +64,17 @@ class Candle {
                 Signal.validateRsi, // 1
                 Signal.validateStochLongLimit, // 2
                 Signal.validateStochLongCross, // 3
-                Signal.validateStochLongLimit, // 4
-                Signal.validateStochLongCross, // 5
-                Signal.validateStochLongLimit, // 6
-                Signal.validateStochLongCross, // 7
+                Signal.validateStochShortimit, // 4
+                Signal.validateStochShortCross, // 5
+                Signal.validateStochRsiLimit, // 6
+                Signal.validateStochRsiCross, // 7
                 Signal.validateMACross, // 8
                 Signal.validateAwesomeOsc //9
             ]
 
+            // if(this.instrument == "EUR_USD" && this.flag=="High") console.log(timeframe[0].modes)
             const signalArr = timeframe[0].modes.map(item => {
+                // if(this.instrument == "EUR_USD" && this.flag=="High") console.log(OPTION_ENUM[item])
                 return arrayOfFunctions[OPTION_ENUM[item]](this)
             })
             

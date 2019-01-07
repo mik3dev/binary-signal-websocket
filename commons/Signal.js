@@ -30,28 +30,28 @@ class Signal {
     }
 
     /* STOCH_LIMIT_SHORT: 4 */
-    static validateStochLongLimit(candle){
+    static validateStochShortimit(candle){
         if(candle.indicatorStochShort.stoch <= config.stochLowerLimit) return 'BUY'
         else if(candle.indicatorStochShort.stoch >= config.stochLowerLimit) return 'SELL'
         else return 'NEUTRAL'
     }
 
     /* STOCH_CROSS_SHORT: 5 */
-    static validateStochLongCross(candle){
+    static validateStochShortCross(candle){
         if(candle.indicatorStochShort.stoch > candle.indicatorStochShort.smooth) return 'BUY'
         else if(candle.indicatorStochShort.stoch < candle.indicatorStochShort.smooth) return 'SELL'
         else return 'NEUTRAL'
     }
 
     /* STOCH_RSI_LIMIT: 6 */
-    static validateStochLongLimit(candle){
+    static validateStochRsiLimit(candle){
         if(candle.indicatorStochRsi.stoch <= config.stochRsiLowerLimit) return 'BUY'
         else if(candle.indicatorStochRsi.stoch >= config.stochHigherLimit) return 'SELL'
         else return 'NEUTRAL'
     }
 
     /* STOCH_RSI_CROSS: 7 */
-    static validateStochLongCross(candle){
+    static validateStochRsiCross(candle){
         if(candle.indicatorStochRsi.stoch > candle.indicatorStochRsi.smooth) return 'BUY'
         else if(candle.indicatorStochRsi.stoch < candle.indicatorStochRsi.smooth) return 'SELL'
         else return 'NEUTRAL'
