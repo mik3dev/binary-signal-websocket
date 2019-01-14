@@ -33,7 +33,7 @@ class Candle {
         this.indicatorAwesomeOsc = Indicators.calcAwesomeOsc(ArrayOfCandles.high, ArrayOfCandles.low, config.AOLongPeriod, config.AOShortPeriod);
         
         //Signals
-        this.signal = this.generateSignals();
+        this.signal = this.generateSignals() || 'NEUTRAL';
     }
     
     generatePriceArray(candles){
