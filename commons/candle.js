@@ -15,11 +15,11 @@ class Candle {
         this.flag = timeframe.flag;
         this.complete = candle.complete;
         this.time = candle.time;
-        this.volume = candle.volume;
-        this.open = candle.mid.o;
-        this.high = candle.mid.h;
-        this.low = candle.mid.l;
-        this.close = candle.mid.c;
+        this.volume = Number.parseInt(candle.volume);
+        this.open = Number.parseFloat(candle.mid.o);
+        this.high = Number.parseFloat(candle.mid.h);
+        this.low = Number.parseFloat(candle.mid.l);
+        this.close = Number.parseFloat(candle.mid.c);
 
         // Indicators
         this.indicatorSma = Indicators.calcSma(ArrayOfCandles.close, config.smaPeriod);
