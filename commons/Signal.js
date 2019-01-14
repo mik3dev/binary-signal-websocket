@@ -3,8 +3,8 @@ const config = require('../config');
 class Signal {
     /* BOL_BAND: 0 */
     static validateBolBand(candle){
-        if(candle.open <= candle.indicatorBolBand.upperBand) return 'BUY'
-        else if(candle.open >= candle.indicatorBolBand.lowerBand) return 'SELL'
+        if(candle.open <= candle.indicatorBolBand.lowerBand) return 'BUY'
+        else if(candle.open >= candle.indicatorBolBand.upperBand) return 'SELL'
         else return 'NEUTRAL'
     }
 
