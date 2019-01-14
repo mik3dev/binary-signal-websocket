@@ -97,10 +97,9 @@ class Indicators {
         const rawStoch = closeSerie.map((item, index, arr) => {
             if(index < k-1) {
                 return 0;
-            }
-            else {
-                const subHigh = highSerie.slice(index-k+1, index);
-                const subLow = lowSerie.slice(index-k+1, index);
+            } else {
+                const subHigh = highSerie.slice(index-k+1, index+1);
+                const subLow = lowSerie.slice(index-k+1, index+1);
 
                 const higherHigh = subHigh.reduce((a,b) => {
                     return Math.max(a, b);
@@ -109,7 +108,7 @@ class Indicators {
                     return Math.min(a, b);
                 })
 
-                return (item - lowerLow)/(higherHigh - lowerLow)*100;
+                return ((item - lowerLow)/(higherHigh - lowerLow))*100;
             }
         })
         const stoch = this.calcSma(rawStoch, d, true);
@@ -142,7 +141,7 @@ class Indicators {
                 return 0;
             } else {
                 if(index === period-1){
-                    const subArr = arr.slice(index-period+1, index);
+                    const subArr = arr.slice(index-period+1, index+1);
 
                     const gain = subArr.reduce((accumulator, currentValue) => {
                         if(currentValue > 0) return accumulator + currentValue;

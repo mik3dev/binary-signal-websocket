@@ -15,11 +15,11 @@ class Candle {
         this.flag = timeframe.flag;
         this.complete = candle.complete;
         this.time = candle.time;
-        this.volume = Number.parseInt(candle.volume);
-        this.open = Number.parseFloat(candle.mid.o);
-        this.high = Number.parseFloat(candle.mid.h);
-        this.low = Number.parseFloat(candle.mid.l);
-        this.close = Number.parseFloat(candle.mid.c);
+        this.volume = candle.volume;
+        this.open = candle.mid.o;
+        this.high = candle.mid.h;
+        this.low = candle.mid.l;
+        this.close = candle.mid.c;
 
         // Indicators
         this.indicatorSma = Indicators.calcSma(ArrayOfCandles.close, config.smaPeriod);
@@ -84,15 +84,15 @@ class Candle {
             let total = signalArr.length;
 
             signalArr.forEach(item => {
-                if(item == 'SELL') sellCount++;
-                else if(item == 'BUY') buyCount++;
-                else if(item == 'NEUTRAL') neutralCount++;
+                if(item === 'SELL') sellCount++;
+                else if(item === 'BUY') buyCount++;
+                else if(item === 'NEUTRAL') neutralCount++;
             })
 
             if(neutralCount > 0) return 'NEUTRAL';
             else {
-                if(sellCount == total) return 'SELL'
-                else if(buyCount == total) return 'BUY'
+                if(sellCount === total) return 'SELL'
+                else if(buyCount === total) return 'BUY'
                 else return 'NEUTRAL'
             }
         }
