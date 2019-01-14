@@ -78,22 +78,16 @@ class Candle {
                 return arrayOfFunctions[OPTION_ENUM[item]](this)
             })
             
-            let sellCount=0;
-            let buyCount=0;
-            let neutralCount=0;
-            let total = signalArr.length;
-
-            signalArr.forEach(item => {
-                if(item === 'SELL') sellCount++;
-                else if(item === 'BUY') buyCount++;
-                else if(item === 'NEUTRAL') neutralCount++;
-            })
-
-            if(neutralCount > 0) return 'NEUTRAL';
+            const totalCount = signalArr.length;
+            const neutralCount = signalArr.filter(signal => signal === "NEUTRAL").length;
+            if(neutralCount>0) return 'NEUTRAL';
             else {
-                if(sellCount === total) return 'SELL'
-                else if(buyCount === total) return 'BUY'
-                else return 'NEUTRAL'
+                const sellCount = signalArr.filter(signal => signal === "SELL").length;
+                if(sellCount == totalCount) return 'SELL';
+                else {
+                    const buyCount = signalArr.filter(signal => signal === "BUY").length;
+                    if(buyCount == totalCount) return 'BUY';
+                }
             }
         }
     }
