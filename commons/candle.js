@@ -31,7 +31,7 @@ class Candle {
         this.indicatorRsi = Indicators.calcRsi(ArrayOfCandles.close, config.rsiPeriod);
         this.indicatorStochRsi = Indicators.calcStochRsi(ArrayOfCandles.close, config.stochRsi_Period, config.stochRsi_K, config.stochRsi_D, config.stochRsi_Smooth);
         this.indicatorAwesomeOsc = Indicators.calcAwesomeOsc(ArrayOfCandles.high, ArrayOfCandles.low, config.AOLongPeriod, config.AOShortPeriod);
-        
+        this.indicatorMACD = Indicators.calcMACD(ArrayOfCandles.close, config.macd_fast_period, config.macd_slow_period, config.macd_signal_period);
         //Signals
         this.signal = this.generateSignals() || 'NEUTRAL';
     }
@@ -75,19 +75,6 @@ class Candle {
             const signalArr = timeframe[0].modes.map(item => {
                 return arrayOfFunctions[OPTION_ENUM[item]](this)
             })
-            // const signalArr = [];
-
-            // if(timeframe[0].modes.filter(item => item == 'BOL_BAND').length > 0) signalArr.push(Signal.validateBolBand(this));
-            // if(timeframe[0].modes.filter(item => item == 'RSI_LIMIT').length > 0) signalArr.push(Signal.validateRsi(this));
-            // if(timeframe[0].modes.filter(item => item == 'STOCH_LIMIT_LONG').length > 0) signalArr.push(Signal.validateStochLongLimit(this));
-            // if(timeframe[0].modes.filter(item => item == 'STOCH_CROSS_LONG').length > 0) signalArr.push(Signal.validateStochLongCross(this));
-            // if(timeframe[0].modes.filter(item => item == 'STOCH_LIMIT_SHORT').length > 0) signalArr.push(Signal.validateStochShortimit(this));
-            // if(timeframe[0].modes.filter(item => item == 'STOCH_CROSS_SHORT').length > 0) signalArr.push(Signal.validateStochShortCross(this));
-            // if(timeframe[0].modes.filter(item => item == 'STOCH_RSI_LIMIT').length > 0) signalArr.push(Signal.validateStochRsiLimit(this));
-            // if(timeframe[0].modes.filter(item => item == 'STOCH_RSI_CROSS').length > 0) signalArr.push(Signal.validateStochRsiCross(this));
-            // if(timeframe[0].modes.filter(item => item == 'MA_CROSS').length > 0) signalArr.push(Signal.validateMACross(this));
-            // if(timeframe[0].modes.filter(item => item == 'AWESOME_OSC').length > 0) signalArr.push(Signal.validateAwesomeOsc(this));
-            
             
             const totalCount = signalArr.length;
             const neutralCount = signalArr.filter(signal => signal === "NEUTRAL").length;
@@ -98,6 +85,7 @@ class Candle {
                 else {
                     const buyCount = signalArr.filter(signal => signal === "BUY").length;
                     if(buyCount == totalCount) return 'BUY';
+                    else return 'NEUTRAL'
                 }
             }
         }

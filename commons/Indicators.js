@@ -22,16 +22,11 @@ class Indicators {
         const kFactor = 2/(period + 1);
         let prevEma = 0;
         const result = serie.map((item, index, arr) => {
-            if(index < period-1){
-                return 0;
-            } else if(index == period-1) {
-                const subArr = arr.filter((subItem, subIndex) => {
-                    return subIndex <= period;
-                })
-                prevEma = this.calcSma(subArr, period);
+            if(index == 0) {
+                prevEma = item;
                 return prevEma;
             } else {
-                prevEma = ((item - prevEma) * kFactor) + prevEma;
+                prevEma = (item * kFactor) + (prevEma * (1-kFactor));
                 return prevEma;
             }
         })
@@ -197,6 +192,24 @@ class Indicators {
 
         if(returnArray) return result;
         return result[result.length-1];
+    }
+
+    /* MACD calculation */
+    static calcMACD(serie, fastPeriod, slowPeriod, signal, returnArray=false){
+        const fastEma = this.calcEma(serie, fastPeriod, true);
+        const slowEma = this.calcEma(serie, slowPeriod, true);
+        const  macdLine = fastEma.map((item, index) => item - slowEma[index]);
+        const signalLine = this.calcEma(macdLine, signal, true);
+        const histogram = macdLine.map((item, index) => item - signalLine[index]);
+        const result = histogram.map((item, index) => {
+            return {
+                macdLine: macdLine[index],
+                signalLine: signalLine[index],
+                histogram: item
+            }
+        });
+        if(returnArray) return result;
+        else return result[result.length-1];
     }
 }
 

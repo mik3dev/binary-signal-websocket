@@ -26,6 +26,9 @@ const AOLongPeriod = process.env.AOLongPeriod || 35;
 const emaPeriod = process.env.emaPeriod || 18;  
 const wmaPeriod = process.env.wmaPeriod || 7;
 const smaPeriod = process.env.smaPeriod || 25;
+const macd_fast_period= process.env.macd_fast_period || 12
+const macd_slow_period= process.env.macd_slow_period || 26
+const macd_signal_period= process.env.macd_signal_period || 9
 
 // Indicators limit vars
 const stochLowerLimit = process.env.stochLowerLimit || 20;
@@ -86,5 +89,8 @@ module.exports = {
     rsiLowerLimit,
     rsiHigherLimit,
     Timeframes,
-    Instruments
+    Instruments,
+    macd_fast_period,
+    macd_slow_period,
+    macd_signal_period,
 }
