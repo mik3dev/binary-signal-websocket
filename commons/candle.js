@@ -32,7 +32,15 @@ class Candle {
         this.indicatorStochRsi = Indicators.calcStochRsi(ArrayOfCandles.close, config.stochRsi_Period, config.stochRsi_K, config.stochRsi_D, config.stochRsi_Smooth);
         this.indicatorAwesomeOsc = Indicators.calcAwesomeOsc(ArrayOfCandles.high, ArrayOfCandles.low, config.AOLongPeriod, config.AOShortPeriod);
         this.indicatorMACD = Indicators.calcMACD(ArrayOfCandles.close, config.macd_fast_period, config.macd_slow_period, config.macd_signal_period);
-        //Signals
+
+        // Previous candle indicators
+        this.prev = {
+            indicatorStochLong: Indicators.calcStoch(ArrayOfCandles.close, ArrayOfCandles.high, ArrayOfCandles.low, config.longStochK, config.Stoch_D, config.Stoch_Smooth, true)[ArrayOfCandles.close.length-2],
+            indicatorStochShort: Indicators.calcStoch(ArrayOfCandles.close, ArrayOfCandles.high, ArrayOfCandles.low, config.shortStochK, config.Stoch_D, config.Stoch_Smooth, true)[ArrayOfCandles.close.length-2],
+            indicatorStochRsi: Indicators.calcStochRsi(ArrayOfCandles.close, config.stochRsi_Period, config.stochRsi_K, config.stochRsi_D, config.stochRsi_Smooth, true)[ArrayOfCandles.close.length-2]
+        }
+        
+        // Signals generator
         this.signal = this.generateSignals() || 'NEUTRAL';
     }
     
@@ -69,7 +77,10 @@ class Candle {
                 Signal.validateStochRsiLimit, // 6
                 Signal.validateStochRsiCross, // 7
                 Signal.validateMACross, // 8
-                Signal.validateAwesomeOsc //9
+                Signal.validateAwesomeOsc, // 9
+                Signal.validatePrevStochCrossShort, // 10
+                Signal.validatePrevStochCrossShort, // 11
+                Signal.validatePrevStochRsiCross //12
             ]
 
             const signalArr = timeframe[0].modes.map(item => {

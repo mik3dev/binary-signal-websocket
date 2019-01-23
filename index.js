@@ -41,5 +41,16 @@ setInterval( () => {
             }))
         })
     })
-    Promise.all(promises).then(r => io.emit('fxData', r)).catch(e => console.log(e));
+    Promise.all(promises).then(r => {
+        const result = config.Instruments.map(item => {
+            const data = r.filter(subItem => subItem.instrument == item)
+            return {
+                instrument: item,
+                high: data.filter(subItem => subItem.flag == 'High')[0],
+                mid: data.filter(subItem => subItem.flag == 'Mid')[0],
+                low: data.filter(subItem => subItem.flag == 'Low')[0],
+            }
+        });
+        io.emit('fxData', result);
+    }).catch(e => console.log(e));
 }, config.TIMER);
